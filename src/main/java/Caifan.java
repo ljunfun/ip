@@ -19,9 +19,13 @@ public class Caifan {
         System.out.println(goodbyePhrase);
     }
 
-    public static void addTask(String line) {
+    public static void addTask(Task task) {
+        taskList[taskCount] = task;
+        taskCount++;
         printLine();
-        System.out.println("\tadded this for you my love: " + line);
+        System.out.println("\tadded this for you my love <3:");
+        System.out.println("\t  " + task.toString());
+        System.out.println("\tNow you have " + taskCount + " tasks in the list.");
         printLine();
     }
 
@@ -31,7 +35,7 @@ public class Caifan {
         System.out.println("\tHere is your To-do List!!");
         for (int i = 0; i < taskCount; i++) {
             Task task = taskList[i];
-            System.out.println("\t" + (i + 1) + ".["+task.getStatusIcon()+"] " + task.getDescription());
+            System.out.println("\t" + (i + 1) + "." + task.toString());
         }
         printLine();
     }
@@ -42,8 +46,10 @@ public class Caifan {
             taskList[index].setDone(true);
             printLine();
             System.out.println("\tYAY!! You have completed it :D");
-            System.out.println("\t  " + "["+taskList[index].getStatusIcon()+"] " + taskList[index].getDescription());
+            System.out.println("\t  " + taskList[index].toString());
             printLine();
+        } else {
+            throw new RuntimeException();
         }
     }
 
@@ -53,8 +59,10 @@ public class Caifan {
             taskList[index].setDone(false);
             printLine();
             System.out.println("\tGet your lazy ass up and finish this ><");
-            System.out.println("\t  " + "["+taskList[index].getStatusIcon()+"] " + taskList[index].getDescription());
+            System.out.println("\t  " + taskList[index].toString());
             printLine();
+        } else {
+            throw new RuntimeException();
         }
     }
 
@@ -76,16 +84,24 @@ public class Caifan {
                 break;
             } else if (line.equalsIgnoreCase("list")) { //prints the list
                 listTasks();
-            } else if (line.startsWith("mark ")) {
+            } else if (line.startsWith("mark")) {
                 int index = Integer.parseInt(line.substring(5)) - 1;
                 markTask(index);
-            } else if (line.startsWith("unmark ")) {
+            } else if (line.startsWith("unmark")) {
                 int index = Integer.parseInt(line.substring(7)) - 1;
                 unmarkTask(index);
-            } else { //add task to list and track number of tasks
-                taskList[taskCount] = new Task(line);
-                taskCount++;
-                addTask(line);
+            } else if (line.startsWith("todo")) {
+                String description = line.substring(5);
+                addTask(new Todo (description));
+            } else if (line.startsWith("deadline")) {
+                String[] parts = line.substring(9).split(" /by ");
+                addTask(new Deadline(parts[0], parts[1]));
+            } else if (line.startsWith("event")) {
+                String[] parts = line.substring(6).split(" /from | /to ");
+                addTask(new Event(parts[0], parts[1], parts[2]));
+            } else {
+                String description = line;
+                addTask(new Task(line));
             }
         }
     }

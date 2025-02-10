@@ -5,8 +5,8 @@ public class Caifan {
     private static int taskCount = 0;
 
     public static void printLine() {
-        String line = "\t____________________________________________________________";
-        System.out.println(line);
+        final String LINE = "\t____________________________________________________________";
+        System.out.println(LINE);
     }
 
     public static void sayHello() {
@@ -17,6 +17,26 @@ public class Caifan {
     public static void sayGoodbye() {
         String goodbyePhrase = "\tBye byeee!! Hope to see you again soon <3";
         System.out.println(goodbyePhrase);
+    }
+
+    public static void printInvalidCommand() {
+        printLine();
+        System.out.println("\tHARH?! I do not understand what is that!!");
+        System.out.println("\tPlease handle something that my smol brain can comprehend >_<");
+        printLine();
+    }
+
+    public static void printOutOfBoundsError() {
+        printLine();
+        System.out.println("\tOh no!! Please enter a valid number >_<");
+        printLine();
+    }
+
+    public static void printInvalidTaskNumber() {
+        printLine();
+        System.out.println("\tAre you sure you gave me a number?! :((");
+        System.out.println("\tPlease try again! With a number this time >_>");
+        printLine();
     }
 
     public static void addTask(Task task) {
@@ -58,7 +78,7 @@ public class Caifan {
         if (index >= 0 && index < taskCount) {
             taskList[index].setDone(false);
             printLine();
-            System.out.println("\tGet your lazy ass up and finish this ><");
+            System.out.println("\tGet your lazy ass up and finish this >_<");
             System.out.println("\t  " + taskList[index].toString());
             printLine();
         } else {
@@ -67,7 +87,7 @@ public class Caifan {
     }
 
     public static void main(String[] args) {
-        String line;
+        String userInput;
         Scanner in = new Scanner(System.in);
 
         //starting message
@@ -76,32 +96,84 @@ public class Caifan {
         printLine();
 
         while (true) {
-            line = in.nextLine();
-            if (line.equalsIgnoreCase("bye")) { //goodbye message
+            userInput = in.nextLine();
+            String stringParts[] = userInput.split(" ", 2);
+            String command = stringParts[0];
+            String description = stringParts[1];
+
+            switch (command.toLowerCase()) {
+            case "bye":
                 printLine();
                 sayGoodbye();
                 printLine();
                 break;
-            } else if (line.equalsIgnoreCase("list")) { //prints the list
+            case "list":
                 listTasks();
-            } else if (line.startsWith("mark")) {
-                int index = Integer.parseInt(line.substring(5)) - 1;
-                markTask(index);
-            } else if (line.startsWith("unmark")) {
-                int index = Integer.parseInt(line.substring(7)) - 1;
-                unmarkTask(index);
-            } else if (line.startsWith("todo")) {
-                String description = line.substring(5);
-                addTask(new Todo (description));
-            } else if (line.startsWith("deadline")) {
-                String[] parts = line.substring(9).split(" /by ");
-                addTask(new Deadline(parts[0], parts[1]));
-            } else if (line.startsWith("event")) {
-                String[] parts = line.substring(6).split(" /from | /to ");
-                addTask(new Event(parts[0], parts[1], parts[2]));
-            } else {
-                String description = line;
-                addTask(new Task(line));
+                break;
+            case "mark":
+                try {
+                    int index = Integer.parseInt(description) - 1;
+                    markTask(index);
+                } catch (IndexOutOfBoundsException e) {
+                    printOutOfBoundsError();
+                } catch (NumberFormatException e) {
+                    printInvalidTaskNumber();
+                }
+                break;
+            case "unmark":
+                try {
+                    int index = Integer.parseInt(description) - 1;
+                    unmarkTask(index);
+                } catch (IndexOutOfBoundsException e) {
+                    printOutOfBoundsError();
+                } catch (NumberFormatException e) {
+                    printInvalidTaskNumber();
+                }
+                break;
+            case "todo":
+                try {
+                    if (description.isBlank()) {
+                        throw new InvalidDescriptionException();
+                    }
+                    addTask(new Todo (description));
+                } catch (InvalidDescriptionException e) {
+                    System.out.println("\tWhy is your description empty?!! Put somwthing there >_<");
+                }
+                break;
+            case "deadline":
+                try {
+                    String[] parts = description.split(" /by ");
+                    String splitDescription = parts[0];
+                    String deadline = parts[1];
+                    if (splitDescription.isBlank() || deadline.isBlank()) {
+                        throw new InvalidDescriptionException();
+                    }
+                    addTask(new Deadline(splitDescription, deadline));
+                } catch (InvalidDescriptionException e) {
+                    System.out.println("\tWhy is your description/deadline empty?!! Put something there >_<");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("\tPlease input your deadline or description properly, HMPH :<");
+                }
+                break;
+            case "event":
+                try {
+                    String[] parts = description.split(" /from | /to ");
+                    String splitDescription = parts[0];
+                    String start = parts[1];
+                    String end = parts[2];
+                    if (splitDescription.isBlank() || start.isBlank() || end.isBlank()) {
+                        throw new InvalidDescriptionException();
+                    }
+                    addTask(new Event(splitDescription, start, end));
+                } catch (InvalidDescriptionException e) {
+                    System.out.println("\tWhy is your description or start/end dates empty?!! Put something there >_<");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("\tPlease input your deadline or start/end dates properly, HMPH :<");
+                }
+                break;
+            default:
+                printInvalidCommand();
+                break;
             }
         }
     }

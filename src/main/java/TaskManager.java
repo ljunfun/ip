@@ -1,3 +1,9 @@
+import caifan.exceptions.InvalidDescriptionException;
+import caifan.tasks.Deadline;
+import caifan.tasks.Event;
+import caifan.tasks.Task;
+import caifan.tasks.Todo;
+
 public class TaskManager {
     private static Task[] taskList = new Task[100];
     private static int taskCount = 0;

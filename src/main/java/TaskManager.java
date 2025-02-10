@@ -5,6 +5,7 @@ import caifan.tasks.Task;
 import caifan.tasks.Todo;
 
 public class TaskManager {
+
     private static Task[] taskList = new Task[100];
     private static int taskCount = 0;
     public static final String LINE = "\t____________________________________________________________";
@@ -28,11 +29,18 @@ public class TaskManager {
         printLine();
     }
 
+    /* print an error whenever an number is being entered that is
+     * bounds of the available index arrays
+     */
     public static void printOutOfBoundsError() {
         printLine();
         System.out.println("\tOh no!! Please enter a valid number >_<");
         printLine();
     }
+
+    /* prints an error whenever the user attempts to input something that
+     * is not a number into the system
+     */
 
     public static void printInvalidTaskNumber() {
         printLine();
@@ -41,9 +49,11 @@ public class TaskManager {
         printLine();
     }
 
+    //processes the tasks according to the command word that is processed
     public static void addTask(Task task) {
         taskList[taskCount] = task;
         taskCount++;
+
         printLine();
         System.out.println("\tadded this for you my love <3:");
         System.out.println("\t  " + task.toString());
@@ -51,6 +61,7 @@ public class TaskManager {
         printLine();
     }
 
+    //processes invalid inputs for commands that are not part of the list of commands accepted
     public static void handleInvalidCommand() {
         printLine();
         System.out.println("\tHARH?! I do not understand what is that!!");
@@ -62,6 +73,8 @@ public class TaskManager {
     public static void handleList() {
         printLine();
         System.out.println("\tHere is your To-do List!!");
+
+        //loop to list all the tasks currently stored in taskList
         for (int i = 0; i < taskCount; i++) {
             Task task = taskList[i];
             System.out.println("\t" + (i + 1) + "." + task.toString());
@@ -72,17 +85,22 @@ public class TaskManager {
     //set task as complete
     public static void handleMark(String input) {
         try {
+            //obtain the task number to be marked
             String indexNumber = input.substring(input.indexOf(" ") +  DESCRIPTION_INDEX);
             int index = Integer.parseInt(indexNumber) - 1;
+
+            //to catch inputs that out of legal bounds of the array initialised
             if (index < 0 && index >= taskCount) {
                 throw new IndexOutOfBoundsException();
             } else {
                 taskList[index].setDone(true);
             }
+
             printLine();
             System.out.println("\tYAY!! You have completed it :D");
             System.out.println("\t  " + taskList[index].toString());
             printLine();
+
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             printOutOfBoundsError();
         } catch (NumberFormatException e) {
@@ -93,17 +111,22 @@ public class TaskManager {
     //set task as incomplete
     public static void handleUnmark(String input) {
         try {
+            //obtain the task number to be unmarked
             String indexNumber = input.substring(input.indexOf(" ") +  DESCRIPTION_INDEX);
             int index = Integer.parseInt(indexNumber) - 1;
+
+            //to catch inputs that out of legal bounds of the array initialised
             if (index < 0 && index >= taskCount) {
                 throw new IndexOutOfBoundsException();
             } else {
                 taskList[index].setDone(false);
             }
+
             printLine();
             System.out.println("\tGet your lazy ass up and finish this >_<");
             System.out.println("\t  " + taskList[index].toString());
             printLine();
+
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             printOutOfBoundsError();
         } catch (NumberFormatException e) {
@@ -111,13 +134,18 @@ public class TaskManager {
         }
     }
 
+    //adds a to-do task into the list
     public static void handleTodo(String input) {
         try {
+            //obtain the task to be completed
             String description = input.substring(input.indexOf(" ") + DESCRIPTION_INDEX);
+
+            //catches an empty description and throws an error accordingly
             if (description.isBlank() || !input.contains(" ")) {
                 throw new InvalidDescriptionException();
             }
             addTask(new Todo(description));
+
         } catch (InvalidDescriptionException e) {
             printLine();
             System.out.println("\tWhy is your description empty?!! Put something there >_<");
@@ -125,14 +153,19 @@ public class TaskManager {
         }
     }
 
+    //adds a task with a description and a deadline into the list
     public static void handleDeadline(String input) {
         try {
+            //obtain the description and the deadline
             String description = input.substring(input.indexOf(" ") + DESCRIPTION_INDEX);
+
+            //split the string according to the word that separates the description and the deadline
             String[] parts = description.split(" /by ");
             String splitDescription = parts[0];
             String deadline = parts[1];
 
             addTask(new Deadline(splitDescription, deadline));
+
         } catch (IndexOutOfBoundsException e) {
             printLine();
             System.out.println("\tWhy is your description/deadline empty?!! Put something there >_<");
@@ -141,15 +174,20 @@ public class TaskManager {
         }
     }
 
+    //adds an event task with a descriiption, start and end dates to the list
     public static void handleEvent(String input) {
         try {
             String description = input.substring(input.indexOf(" ") + DESCRIPTION_INDEX);
+            /* split the string according to the word that separates the description,
+             * the start date and the end date
+             */
             String[] parts = description.split(" /from | /to ");
             String splitDescription = parts[0];
             String start = parts[1];
             String end = parts[2];
 
             addTask(new Event(splitDescription, start, end));
+
         } catch (IndexOutOfBoundsException e) {
             printLine();
             System.out.println("\tWhy is your description or start/end dates empty?!! Put something there >_<");
@@ -158,6 +196,7 @@ public class TaskManager {
         }
     }
 
+    //main logic that processes the commands as they are sifted with the input
     public static void handleInput(String input) {
         String stringParts[] = input.split(" ", 2);
         String command = stringParts[0];

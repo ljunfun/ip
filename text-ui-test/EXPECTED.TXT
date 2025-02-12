@@ -1,7 +1,80 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+	____________________________________________________________
+	Hello! I'm Caifan!
+	What can I do for you?
+	____________________________________________________________
+	____________________________________________________________
+	Are you sure you gave me a number?! T_T
+	Please try again! With a number this time >_>
+	____________________________________________________________
+	____________________________________________________________
+	Are you sure you gave me a number?! T_T
+	Please try again! With a number this time >_>
+	____________________________________________________________
+	____________________________________________________________
+	Why is your description empty?!! Put something there >_<
+	____________________________________________________________
+	____________________________________________________________
+	added this for you my love <3:
+	  [T][ ] wave hello
+	Now you have 1 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Why is your description/deadline empty?!! Put something there >_<
+	Please input a valid deadline or description, HMPH :<
+	____________________________________________________________
+	____________________________________________________________
+	Why is your description/deadline empty?!! Put something there >_<
+	Please input a valid deadline or description, HMPH :<
+	____________________________________________________________
+	____________________________________________________________
+	added this for you my love <3:
+	  [D][ ] studio (by: today)
+	Now you have 2 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Why is your description or start/end dates empty?!! Put something there >_<
+	Please input a valid event or start/end dates, HMPH :<
+	____________________________________________________________
+	____________________________________________________________
+	Why is your description or start/end dates empty?!! Put something there >_<
+	Please input a valid event or start/end dates, HMPH :<
+	____________________________________________________________
+	____________________________________________________________
+	Why is your description or start/end dates empty?!! Put something there >_<
+	Please input a valid event or start/end dates, HMPH :<
+	____________________________________________________________
+	____________________________________________________________
+	added this for you my love <3:
+	  [E][ ] hoiday (from: today to: tmr)
+	Now you have 3 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Here is your To-do List!!
+	1.[T][ ] wave hello
+	2.[D][ ] studio (by: today)
+	3.[E][ ] hoiday (from: today to: tmr)
+	____________________________________________________________
+	____________________________________________________________
+	Oh no!! Please enter a valid number >_<
+	____________________________________________________________
+	____________________________________________________________
+	YAY!! You have completed it :D
+	  [T][✓] wave hello
+	____________________________________________________________
+	____________________________________________________________
+	Get your lazy ass up and finish this >_<
+	  [T][ ] wave hello
+	____________________________________________________________
+	____________________________________________________________
+	Here is your To-do List!!
+	1.[T][ ] wave hello
+	2.[D][ ] studio (by: today)
+	3.[E][ ] hoiday (from: today to: tmr)
+	____________________________________________________________
+	____________________________________________________________
+	HARH?! I do not understand what is that!!
+	Please provide something that my smol brain can comprehend >_<
+	____________________________________________________________
+	____________________________________________________________
+	Bye byeee!! Hope to see you again soon <3
+	____________________________________________________________

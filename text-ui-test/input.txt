@@ -1,0 +1,18 @@
+mark
+unmark
+todo
+todo wave hello
+deadline
+deadline studio
+deadline studio /by today
+event
+event holiday
+event holiday /from today
+event hoiday /from today /to tmr
+list
+mark 0
+mark 1
+unmark 1
+list
+randomcommand
+bye

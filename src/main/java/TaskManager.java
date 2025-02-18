@@ -4,11 +4,14 @@ import caifan.tasks.Event;
 import caifan.tasks.Task;
 import caifan.tasks.Todo;
 
+import java.util.ArrayList;
+
 public class TaskManager {
 
-    private static Task[] taskList = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<>();
     private static int taskCount = 0;
     public static final String LINE = "\t____________________________________________________________";
+    public static final int INDEX_OFFSET = 1;
     public static final int DESCRIPTION_INDEX = 1;
 
     public static void printLine() {
@@ -51,7 +54,7 @@ public class TaskManager {
 
     //processes the tasks according to the command word that is processed
     public static void addTask(Task task) {
-        taskList[taskCount] = task;
+        taskList.add(task);
         taskCount++;
 
         printLine();
@@ -76,8 +79,8 @@ public class TaskManager {
 
         //loop to list all the tasks currently stored in taskList
         for (int i = 0; i < taskCount; i++) {
-            Task task = taskList[i];
-            System.out.println("\t" + (i + 1) + "." + task.toString());
+            Task task = taskList.get(i);
+            System.out.println("\t" + (i + INDEX_OFFSET) + "." + task.toString());
         }
         printLine();
     }
@@ -86,22 +89,22 @@ public class TaskManager {
     public static void handleMark(String input) {
         try {
             //obtain the task number to be marked
-            String indexNumber = input.substring(input.indexOf(" ") +  DESCRIPTION_INDEX);
-            int index = Integer.parseInt(indexNumber) - 1;
+            String indexNumber = input.substring(input.indexOf(" ") + DESCRIPTION_INDEX);
+            int index = Integer.parseInt(indexNumber) - INDEX_OFFSET;
 
             //to catch inputs that out of legal bounds of the array initialised
             if (index < 0 && index >= taskCount) {
                 throw new IndexOutOfBoundsException();
             } else {
-                taskList[index].setDone(true);
+                taskList.get(index).setDone(true);
             }
 
             printLine();
             System.out.println("\tYAY!! You have completed it :D");
-            System.out.println("\t  " + taskList[index].toString());
+            System.out.println("\t  " + taskList.get(index).toString());
             printLine();
 
-        } catch (IndexOutOfBoundsException | NullPointerException e) {
+        } catch (IndexOutOfBoundsException e) {
             printOutOfBoundsError();
         } catch (NumberFormatException e) {
             printInvalidTaskNumber();
@@ -112,22 +115,44 @@ public class TaskManager {
     public static void handleUnmark(String input) {
         try {
             //obtain the task number to be unmarked
-            String indexNumber = input.substring(input.indexOf(" ") +  DESCRIPTION_INDEX);
-            int index = Integer.parseInt(indexNumber) - 1;
+            String indexNumber = input.substring(input.indexOf(" ") + DESCRIPTION_INDEX);
+            int index = Integer.parseInt(indexNumber) - INDEX_OFFSET;
 
             //to catch inputs that out of legal bounds of the array initialised
             if (index < 0 && index >= taskCount) {
                 throw new IndexOutOfBoundsException();
             } else {
-                taskList[index].setDone(false);
+                taskList.get(index).setDone(false);
             }
 
             printLine();
             System.out.println("\tGet your lazy ass up and finish this >_<");
-            System.out.println("\t  " + taskList[index].toString());
+            System.out.println("\t  " + taskList.get(index).toString());
             printLine();
 
-        } catch (IndexOutOfBoundsException | NullPointerException e) {
+        } catch (IndexOutOfBoundsException e) {
+            printOutOfBoundsError();
+        } catch (NumberFormatException e) {
+            printInvalidTaskNumber();
+        }
+    }
+
+    //delete a task from list
+    public static void handleDelete(String input) {
+        try {
+            String indexNumber = input.substring(input.indexOf(" ") + DESCRIPTION_INDEX);
+            int index = Integer.parseInt(indexNumber) - INDEX_OFFSET;
+
+            Task removedTask = taskList.remove(index);
+            taskCount--;
+
+            printLine();
+            System.out.println("\tNoted. I've removed this task:");
+            System.out.println("\t  " + removedTask.toString());
+            System.out.println("\tNow you have " + taskCount + " tasks in the list.");
+            printLine();
+
+        } catch (IndexOutOfBoundsException e) {
             printOutOfBoundsError();
         } catch (NumberFormatException e) {
             printInvalidTaskNumber();
@@ -174,7 +199,7 @@ public class TaskManager {
         }
     }
 
-    //adds an event task with a descriiption, start and end dates to the list
+    //adds an event task with a description, start and end dates to the list
     public static void handleEvent(String input) {
         try {
             String description = input.substring(input.indexOf(" ") + DESCRIPTION_INDEX);
@@ -222,6 +247,9 @@ public class TaskManager {
             break;
         case "event":
             handleEvent(input);
+            break;
+        case "delete":
+            handleDelete(input);
             break;
         default:
             handleInvalidCommand();

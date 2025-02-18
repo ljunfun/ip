@@ -7,11 +7,9 @@ public class Caifan {
     private static TaskManager taskManager = new TaskManager();
     static boolean isActive = true;
 
-    private static Storage storage;
-
     //start of main loop
     public static void main(String[] args) {
-        storage.createFile();
+
 
         taskManager.printHelloMessage();
         Scanner in = new Scanner(System.in);

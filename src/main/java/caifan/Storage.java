@@ -17,7 +17,7 @@ public class Storage {
     public static final String FILE_PATH = "./data/Caifan.txt";
 
     public static void loadData(ArrayList<Task> taskList) {
-        File file = new File();
+        File file = new File(FILE_PATH);
 
         try {
             Scanner s = new Scanner(file);
@@ -71,7 +71,7 @@ public class Storage {
         }
     }
 
-    public void createFile() {
+    public static void createFile() {
         File dir = new File(FILE_DIR);
         dir.mkdir();
         try {

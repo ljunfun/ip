@@ -17,6 +17,7 @@ public class TaskManager {
     public static final int DESCRIPTION_INDEX = 1;
 
     static {
+        Storage.createFile();
         Storage.loadFile(taskList);
     }
 

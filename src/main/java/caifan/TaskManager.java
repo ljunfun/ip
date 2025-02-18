@@ -1,3 +1,5 @@
+package caifan;
+
 import caifan.exceptions.InvalidDescriptionException;
 import caifan.tasks.Deadline;
 import caifan.tasks.Event;
@@ -10,6 +12,10 @@ public class TaskManager {
     private static int taskCount = 0;
     public static final String LINE = "\t____________________________________________________________";
     public static final int DESCRIPTION_INDEX = 1;
+
+    static {
+        Storage.loadFile(taskList);
+    }
 
     public static void printLine() {
         System.out.println(LINE);
@@ -201,6 +207,7 @@ public class TaskManager {
         String stringParts[] = input.split(" ", 2);
         String command = stringParts[0];
 
+
         switch (command.toLowerCase()) {
         case "bye":
             Caifan.isActive = false;
@@ -224,6 +231,7 @@ public class TaskManager {
             handleEvent(input);
             break;
         default:
+            Storage.loadData(taskList);
             handleInvalidCommand();
             break;
         }

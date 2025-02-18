@@ -23,6 +23,10 @@ public abstract class Task {
         isDone = status;
     }
 
+    public String getType() {
+        return " ";
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

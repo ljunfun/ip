@@ -9,6 +9,14 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public String getDeadline() {
+        return this.deadline;
+    }
+
+    public String getType() {
+        return "D";
+    }
+
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }

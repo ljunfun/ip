@@ -13,6 +13,14 @@ public abstract class Task {
         return this.description;
     }
 
+    public String getType() {
+        return "";
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     // mark done task with ✓
     public String getStatusIcon() {
         return (isDone ? "✓" : " ");
@@ -21,10 +29,6 @@ public abstract class Task {
     //change the status of current task
     public void setDone(boolean status) {
         isDone = status;
-    }
-
-    public String getType() {
-        return " ";
     }
 
     @Override

@@ -11,16 +11,16 @@ public class Event extends Task {
         this.end = end;
     }
 
+    public String getType() {
+        return "E";
+    }
+
     public String getStart() {
         return this.start;
     }
 
     public String getEnd() {
         return this.end;
-    }
-
-    public String getType() {
-        return "E";
     }
 
     public String toString() {

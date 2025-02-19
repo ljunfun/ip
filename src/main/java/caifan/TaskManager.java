@@ -11,14 +11,12 @@ import java.util.ArrayList;
 public class TaskManager {
 
     private static ArrayList<Task> taskList = new ArrayList<>();
-    private static int taskCount = 0;
     public static final String LINE = "\t____________________________________________________________";
     public static final int INDEX_OFFSET = 1;
     public static final int DESCRIPTION_INDEX = 1;
 
-    static {
-        Storage.createFile();
-        Storage.loadFile(taskList);
+    public static void loadTaskList() {
+        Storage.loadData(taskList);
     }
 
     public static void printLine() {
@@ -62,12 +60,11 @@ public class TaskManager {
     //processes the tasks according to the command word that is processed
     public static void addTask(Task task) {
         taskList.add(task);
-        taskCount++;
 
         printLine();
         System.out.println("\tadded this for you my love <3:");
         System.out.println("\t  " + task.toString());
-        System.out.println("\tNow you have " + taskCount + " tasks in the list.");
+        System.out.println("\tNow you have " + taskList.size() + " tasks in the list.");
         printLine();
     }
 
@@ -85,7 +82,7 @@ public class TaskManager {
         System.out.println("\tHere is your To-do List!!");
 
         //loop to list all the tasks currently stored in taskList
-        for (int i = 0; i < taskCount; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             System.out.println("\t" + (i + INDEX_OFFSET) + "." + task.toString());
         }
@@ -100,7 +97,7 @@ public class TaskManager {
             int index = Integer.parseInt(indexNumber) - INDEX_OFFSET;
 
             //to catch inputs that out of legal bounds of the array initialised
-            if (index < 0 && index >= taskCount) {
+            if (index < 0 && index >= taskList.size()) {
                 throw new IndexOutOfBoundsException();
             } else {
                 taskList.get(index).setDone(true);
@@ -126,7 +123,7 @@ public class TaskManager {
             int index = Integer.parseInt(indexNumber) - INDEX_OFFSET;
 
             //to catch inputs that out of legal bounds of the array initialised
-            if (index < 0 && index >= taskCount) {
+            if (index < 0 && index >= taskList.size()) {
                 throw new IndexOutOfBoundsException();
             } else {
                 taskList.get(index).setDone(false);
@@ -151,12 +148,11 @@ public class TaskManager {
             int index = Integer.parseInt(indexNumber) - INDEX_OFFSET;
 
             Task removedTask = taskList.remove(index);
-            taskCount--;
 
             printLine();
             System.out.println("\tNoted. I've removed this task:");
             System.out.println("\t  " + removedTask.toString());
-            System.out.println("\tNow you have " + taskCount + " tasks in the list.");
+            System.out.println("\tNow you have " + taskList.size() + " tasks in the list.");
             printLine();
 
         } catch (IndexOutOfBoundsException e) {
@@ -230,12 +226,14 @@ public class TaskManager {
 
     //main logic that processes the commands as they are sifted with the input
     public static void handleInput(String input) {
+
         String stringParts[] = input.split(" ", 2);
         String command = stringParts[0];
 
 
         switch (command.toLowerCase()) {
         case "bye":
+            Storage.saveFile(taskList);
             Caifan.isActive = false;
             return;
         case "list":
@@ -260,7 +258,6 @@ public class TaskManager {
             handleDelete(input);
             break;
         default:
-            Storage.loadData(taskList);
             handleInvalidCommand();
             break;
         }

@@ -9,8 +9,8 @@ public class Caifan {
 
     //start of main loop
     public static void main(String[] args) {
-
-
+        Storage.createFile();
+        TaskManager.loadTaskList();
         taskManager.printHelloMessage();
         Scanner in = new Scanner(System.in);
 

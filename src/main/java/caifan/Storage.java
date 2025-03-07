@@ -14,11 +14,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles file operations for saving and loading tasks.
+ */
 public class Storage {
 
     public static final String FILE_DIR = "./data";
     public static final String FILE_PATH = "./data/Caifan.txt";
 
+    /**
+     * Loads tasks from the file into the provided task list.
+     * @param taskList The list to load tasks into
+     */
     public static void loadData(ArrayList<Task> taskList) {
         File file = new File(FILE_PATH);
         int currentIndex = 0;
@@ -65,6 +72,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts a task object to its string representation for storage.
+     * @param task The task to convert
+     * @return String representation of the task
+     */
     private static String taskToString(Task task) {
         String type = task.getType();
         boolean status = task.isDone();
@@ -83,6 +95,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current task list to file.
+     * @param taskList The task list to save
+     */
     public static void saveFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
@@ -95,6 +111,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates the necessary directory and file for storage if they don't exist.
+     */
     public static void createFile() {
         File dir = new File(FILE_DIR);
         File f = new File(FILE_PATH);

@@ -3,13 +3,19 @@ package caifan;
 import caifan.commands.*;
 import caifan.exceptions.InvalidDescriptionException;
 
+/**
+ * Parses user input and converts it into appropriate commands.
+ */
 public class Parser {
 
     private static TaskList taskList;
 
-
-
-    //main logic that processes the commands as they are sifted with the input
+    /**
+     * Parses the user input and returns the appropriate command.
+     * @param input The user input to parse
+     * @return The corresponding Command object
+     * @throws InvalidDescriptionException if the command description is invalid
+     */
     public static Command parseCommand(String input) throws InvalidDescriptionException {
 
         String stringParts[] = input.split(" ", 2);
@@ -18,7 +24,7 @@ public class Parser {
         switch (command.toLowerCase()) {
         case "bye":
             Storage.saveFile(taskList);
-            return new ByeCommand(input);
+            return new ExitCommand(input);
         case "list":
             return new ListCommand(input);
         case "mark":

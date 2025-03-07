@@ -1,5 +1,6 @@
 package caifan;
 
+import caifan.exceptions.InvalidDescriptionException;
 import caifan.tasks.Task;
 
 import java.util.ArrayList;
@@ -36,6 +37,37 @@ public class TaskList {
             Ui.printOutOfBoundsError();
         } catch (NumberFormatException e) {
             Ui.printInvalidTaskNumber();
+        }
+    }
+
+    public static void handleFind(String input) {
+        try {
+            String keyword = input.substring(input.indexOf(" ") + DESCRIPTION_INDEX);
+            if (keyword.isBlank() || !input.contains(" ")) {
+                throw new InvalidDescriptionException();
+            }
+
+            ArrayList<Task> tasksWithKeyword = new ArrayList<>();
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
+                if (task.getDescription().toLowerCase().contains(keyword)) {
+                    tasksWithKeyword.add(task);
+                }
+            }
+            Ui.printLine();
+            if (tasksWithKeyword.isEmpty()) {
+                Ui.println("\tNo matching tasks found TT");
+            } else {
+                Ui.println("Here are some matching tasks in the list ᕕ(╯°□°)ᕗ:");
+                for (int i = 0; i < tasksWithKeyword.size(); i++) {
+                    Ui.println("\t" + (i + INDEX_OFFSET) + ". " + tasksWithKeyword.get(i).toString());
+                }
+            }
+            Ui.printLine();
+        } catch (InvalidDescriptionException e) {
+            Ui.printLine();
+            Ui.println("\tWhy is your description empty?!! Put something there >_<");
+            Ui.printLine();
         }
     }
 

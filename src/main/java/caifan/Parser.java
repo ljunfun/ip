@@ -33,6 +33,8 @@ public class Parser {
             return new EventCommand(input);
         case "delete":
             return new DeleteCommand(input);
+        case "find":
+            return new FindCommand(input);
         default:
             throw new InvalidDescriptionException();
         }

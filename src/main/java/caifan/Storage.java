@@ -83,11 +83,11 @@ public class Storage {
         }
     }
 
-    public static void saveFile(ArrayList<Task> taskList) {
+    public static void saveFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
-            for (int i = 0; i < taskList.size(); i++) {
-                fw.write(taskToString(taskList.get(i)) + System.lineSeparator());
+            for (int i = 0; i < taskList.getSize(); i++) {
+                fw.write(taskToString(taskList.getTask(i)) + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {

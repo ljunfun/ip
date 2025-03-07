@@ -56,8 +56,6 @@ public class Ui {
     public static void printList() {
         printLine();
         println("\tHere is your To-do List!!");
-
-        //loop to list all the tasks currently stored in taskList
         for (int i = 0; i < TaskList.getSize(); i++) {
             Task task = TaskList.getTask(i);
             println("\t" + (i + INDEX_OFFSET) + "." + task.toString());

@@ -35,7 +35,7 @@ public class Ui {
      */
     public static void printHelloMessage() {
         printLine();
-        String welcomePhrase = "\tHello! I'm Caifan!\n" + "\tWhat can I do for you?";
+        String welcomePhrase = "\tHello! I'm Caifan!\n" + "\tWhat can I do for you sweetheart <3?";
         println(welcomePhrase);
         printLine();
     }
@@ -110,7 +110,7 @@ public class Ui {
      */
     public static void printDeleteTask(Task removedTask) {
         printLine();
-        println("\tNoted. I've removed this task:");
+        println("\tOkie Dookie! I've removed this task:");
         println("\t  " + removedTask.toString());
         println("\tNow you have " + taskList.getSize() + " tasks in the list.");
         printLine();
@@ -123,6 +123,17 @@ public class Ui {
     public static void printMark(int index) {
         printLine();
         println("\tYAY!! You have completed it :D");
+        println("\t  " + taskList.getTask(index).toString());
+        printLine();
+    }
+
+    /**
+     * Displays confirmation message after unmarking a task as done.
+     * @param index The index of the task that was marked as undone
+     */
+    public static void printUnmark(int index) {
+        printLine();
+        println("\tGet your lazy ass up and finish this >_<");
         println("\t  " + taskList.getTask(index).toString());
         printLine();
     }

@@ -85,7 +85,7 @@ public class TaskList {
             if (tasksWithKeyword.isEmpty()) {
                 Ui.println("\tNo matching tasks found TT");
             } else {
-                Ui.println("Here are some matching tasks in the list ᕕ(╯°□°)ᕗ:");
+                Ui.println("\tHere are some matching tasks in the list ᕕ(╯°□°)ᕗ:");
                 for (int i = 0; i < tasksWithKeyword.size(); i++) {
                     Ui.println("\t" + (i + INDEX_OFFSET) + ". " + tasksWithKeyword.get(i).toString());
                 }
@@ -136,17 +136,11 @@ public class TaskList {
             } else {
                 taskList.get(index).setDone(false);
             }
-
-            Ui.printLine();
-            System.out.println("\tGet your lazy ass up and finish this >_<");
-            System.out.println("\t  " + taskList.get(index).toString());
-            Ui.printLine();
-
+            Ui.printUnmark(index);
         } catch (IndexOutOfBoundsException e) {
             Ui.printOutOfBoundsError();
         } catch (NumberFormatException e) {
             Ui.printInvalidTaskNumber();
         }
     }
-
 }

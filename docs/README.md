@@ -42,7 +42,7 @@ Command `todo DESCRIPTION`
 Example: ` todo read book`
 
 ```
-added this for you my love <3:
+Added this for you my love <3:
   [T][ ] read book
 Now you have 1 tasks in the list.
 ```
@@ -54,7 +54,7 @@ Command: `deadline DESCRIPTION /by DEADLINE`
 Example: `deadline submit report /by Friday 5pm`
 
 ```
-added this for you my love <3:
+Added this for you my love <3:
   [D][ ] submit report (by: Friday 5pm)
 Now you have 2 tasks in the list.
 ```
@@ -66,7 +66,7 @@ Command: `event DESCRIPTION /from START /to END`
 Example: `event team meeting /from Mon 2pm /to Mon 4pm`
 
 ```
-added this for you my love <3:
+Added this for you my love <3:
   [E][ ] team meeting (from: Mon 2pm to: Mon 4pm)
 Now you have 3 tasks in the list.
 ```

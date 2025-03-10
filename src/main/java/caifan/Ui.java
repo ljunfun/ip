@@ -98,7 +98,7 @@ public class Ui {
      */
     public static void printAddTask(Task task) {
         printLine();
-        println("\tadded this for you my love <3:");
+        println("\tAdded this for you my love <3:");
         println("\t  " + task.toString());
         println("\tNow you have " + taskList.getSize() + " tasks in the list.");
         printLine();

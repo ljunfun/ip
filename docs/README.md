@@ -24,9 +24,28 @@ todos, deadlines, and events.
     - [Saving and Exiting the Application](#saving-and-exiting-the-application)
 
 ## Quick Start
-1. Ensure that you have `Java 17` or above installed on your computer.
-2. Download the `.jar` file from (placeholder)
-3. Copy the file to the directory you want to use as the home directory for your task tracker
+1. Ensure you have Java `17` or above installed in your Computer.
+2. Download the latest `.jar` file from [here](https://github.com/ljunfun/ip/releases/tag/A-Release).
+3. Copy the file to the folder you want to use as the home folder for your Task Tracker.
+4. Open a command terminal, cd into the folder you put the jar file in, and use the
+   `java -jar caifan.jar` command to run the application.
+
+   Your command terminal should show the following:
+```
+Hello! I'm Caifan!
+What can I do for you sweetheart <3?
+```
+5. Type the command in the command terminal and press Enter to execute it.
+
+   Some example commands you can try:
+
+   * `list`: List all tasks currently saved by the task tracker.
+   * `deadline Assignment 4 /by Sunday`: Adds a `Deadline` type task marked as not done
+     with description `Assignment 4` and deadline `Sunday` to the task tracker.
+   * `delete 2`: Deletes the 2nd task listed in the task tracker's record of tasks.
+   * `bye`: Exits the app.
+
+6. Refer to the Features below for the exact details of each command.
 
 ## Features
 ### Adding Tasks
